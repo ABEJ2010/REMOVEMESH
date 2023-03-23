@@ -1,0 +1,24 @@
+local removedHats = {}
+for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if v:IsA("Accessory") then
+        if v.Handle:FindFirstChildOfClass("Mesh") or v.Handle:FindFirstChildOfClass("SpecialMesh") then
+            if v.Handle:FindFirstChildOfClass("SpecialMesh") then
+                v.Handle:FindFirstChildOfClass("SpecialMesh"):Remove()
+                table.insert(removedHats, v.Name)
+            end
+        end
+    end
+end
+
+if #removedHats > 0 then
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "The Meshes have been removed from your hats [✓]",
+        Text = "",
+        Duration = 5,
+    })
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Hats that were Unmeshed:",
+        Text = table.concat(removedHats, "\n"),
+        Duration = 8.5,
+    })
+end
